@@ -1,4 +1,13 @@
-<h1>Trivia</h1>
-<h2>Ingresa tu nombre</h2>
-<input type="text"[(ngModel)]="userName">
-<button (click)="onUserNameCreate()">Aceptar</button>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Trivia</h1>
+            <h2>Ingresa tu nombre</h2>
+            <div>
+                <input type="text" [(ngModel)]="userName">
+                <button class="btn-secondary" (click)="onUserNameCreate()">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>

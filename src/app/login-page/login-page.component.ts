@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -8,14 +8,35 @@ import { UserService } from '../user.service';
 })
 export class LoginPageComponent implements OnInit {
   userService:UserService
-  constructor(userService:UserService) {this.userService=userService }
+  router:Router
+  constructor(userService:UserService,router:Router) {
+    this.userService=userService, 
+    this.router=router
+  }
 
-  ngOnInit(): void {
+  ngOnInit():void{
+    const isLogin: boolean=this.userService.checkLogInUser()
+    if(isLogin==true){
+      this.router.navigateByUrl('/game');
+    }
   }
   userName=""
 
   onUserNameCreate(){
+    if(this.userName==""){
+      alert("El nombre no debe estar vacio")
+      return
+    }
     this.userService.createUserName(this.userName)
+    this.router.navigateByUrl('/game');
+  }
+
+  isLoggedIn(){
+    const userName=localStorage.getItem("userName")
+    if(userName!=null){
+      this.userService.createUserName(userName)
+      this.router.navigateByUrl('/game');
+    }
   }
 
 }
