@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,8 @@ export class GameService {
     "Opcion 4"
   ]
   correctAnswer:string="Opcion 3"
-  constructor() { }
+  userService:UserService
+  constructor(userService:UserService) {
+    this.userService=userService
+   }
 }

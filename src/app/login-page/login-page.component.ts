@@ -15,26 +15,30 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit():void{
-    const isLogin: boolean=this.userService.checkLogInUser()
+    const isLogin: boolean=this.userService.checkLoginUser()
     if(isLogin==true){
       this.router.navigateByUrl('/game');
     }
   }
   userName=""
-
-  onUserNameCreate(){
-    if(this.userName==""){
-      alert("El nombre no debe estar vacio")
+  userPassword=""
+  async onUserNameCreate(){
+    if(this.userName=="" || this.userPassword==""){
+      alert("El nombre y password no debe estar vacio")
       return
     }
-    this.userService.createUserName(this.userName)
-    this.router.navigateByUrl('/game');
+    const loginValidation=await this.userService.createUserName(this.userName,this.userPassword)
+    if(loginValidation==true){
+      this.router.navigateByUrl('/game')
+    }else{
+      alert("Login failed please try again")
+    }
   }
 
   isLoggedIn(){
     const userName=localStorage.getItem("userName")
     if(userName!=null){
-      this.userService.createUserName(userName)
+      //this.userService.createUserName(userName,"")
       this.router.navigateByUrl('/game');
     }
   }
