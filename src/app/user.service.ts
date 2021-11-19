@@ -39,12 +39,16 @@ export class UserService {
       if(loginResponse.status==true){
         localStorage.setItem("userName",name)
         localStorage.setItem("token",loginResponse.data.token)
+        this.userName=name
+        this.token=loginResponse.data.token
         return true
       }
       return false
     }
     localStorage.setItem("userName",name)
     localStorage.setItem("token",registerReponse.data.token)
+    this.userName=name
+    this.token=registerReponse.data.token
     return true
   }
   signOut(){

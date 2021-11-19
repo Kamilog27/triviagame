@@ -23,6 +23,7 @@ correctAnswer:number=-1
   }
 
   ngOnInit(): void {
+    this.userService.checkLoginUser()
   }
   signOut(){
     this.userService.signOut()
@@ -35,9 +36,11 @@ correctAnswer:number=-1
     }else{
       this.correctAnswer=0
     }
+    this.gameService.sendUserResponse(this.gameService.currentQuestion,answer)
   }
   nextQuestion(){
     this.correctAnswer=-1
+    this.gameService.setNewTriviaQuestion()
   }
   goToLoader(){
     this.router.navigateByUrl('/score')
