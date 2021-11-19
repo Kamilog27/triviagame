@@ -37,6 +37,9 @@ correctAnswer:number=-1
       this.correctAnswer=0
     }
     this.gameService.sendUserResponse(this.gameService.currentQuestion,answer)
+    setTimeout(()=>{
+      this.nextQuestion()
+    }, 1000);
   }
   nextQuestion(){
     this.correctAnswer=-1
